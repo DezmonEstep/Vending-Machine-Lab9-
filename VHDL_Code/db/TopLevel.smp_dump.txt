@@ -1,0 +1,11 @@
+
+State Machine - |moore|Cs
+Name Cs.c35 Cs.c30 Cs.c25 Cs.c20 Cs.c15 Cs.c10 Cs.c5 Cs.c0 
+Cs.c0 0 0 0 0 0 0 0 0 
+Cs.c5 0 0 0 0 0 0 1 1 
+Cs.c10 0 0 0 0 0 1 0 1 
+Cs.c15 0 0 0 0 1 0 0 1 
+Cs.c20 0 0 0 1 0 0 0 1 
+Cs.c25 0 0 1 0 0 0 0 1 
+Cs.c30 0 1 0 0 0 0 0 1 
+Cs.c35 1 0 0 0 0 0 0 1 
