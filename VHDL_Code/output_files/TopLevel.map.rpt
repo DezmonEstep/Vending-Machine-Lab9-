@@ -1,5 +1,5 @@
 Analysis & Synthesis report for TopLevel
-Tue Apr 19 14:53:34 2022
+Tue Apr 19 17:16:30 2022
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -13,12 +13,14 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |moore|Cs
+  8. State Machine - |TopLevel|moore:FSM|Cs
   9. User-Specified and Inferred Latches
- 10. General Register Statistics
- 11. Post-Synthesis Netlist Statistics for Top Partition
- 12. Elapsed Time Per Partition
- 13. Analysis & Synthesis Messages
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Post-Synthesis Netlist Statistics for Top Partition
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
 
 
 
@@ -45,16 +47,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Apr 19 14:53:34 2022       ;
+; Analysis & Synthesis Status        ; Successful - Tue Apr 19 17:16:30 2022       ;
 ; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                      ; TopLevel                                    ;
-; Top-level Entity Name              ; moore                                       ;
+; Top-level Entity Name              ; TopLevel                                    ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 37                                          ;
-;     Total combinational functions  ; 37                                          ;
-;     Dedicated logic registers      ; 8                                           ;
-; Total registers                    ; 8                                           ;
-; Total pins                         ; 12                                          ;
+; Total logic elements               ; 67                                          ;
+;     Total combinational functions  ; 66                                          ;
+;     Dedicated logic registers      ; 37                                          ;
+; Total registers                    ; 37                                          ;
+; Total pins                         ; 16                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -70,7 +72,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                           ; Setting            ; Default Value      ;
 +------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                           ; 10M50DAF484C6GES   ;                    ;
-; Top-level entity name                                            ; moore              ; TopLevel           ;
+; Top-level entity name                                            ; TopLevel           ; TopLevel           ;
 ; Family name                                                      ; MAX 10             ; Cyclone V          ;
 ; Use smart compilation                                            ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
@@ -168,60 +170,64 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                              ;
-+----------------------------------+-----------------+-----------------+--------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                       ; Library ;
-+----------------------------------+-----------------+-----------------+--------------------------------------------------------------------+---------+
-; moore.vhd                        ; yes             ; User VHDL File  ; C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd ;         ;
-+----------------------------------+-----------------+-----------------+--------------------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                    ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                             ; Library ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------+---------+
+; TopLevel.vhd                     ; yes             ; User VHDL File  ; C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd    ;         ;
+; moore.vhd                        ; yes             ; User VHDL File  ; C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd       ;         ;
+; CLK_Divider.vhd                  ; yes             ; User VHDL File  ; C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/CLK_Divider.vhd ;         ;
++----------------------------------+-----------------+-----------------+--------------------------------------------------------------------------+---------+
 
 
-+-------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary           ;
-+---------------------------------------------+---------+
-; Resource                                    ; Usage   ;
-+---------------------------------------------+---------+
-; Estimated Total logic elements              ; 37      ;
-;                                             ;         ;
-; Total combinational functions               ; 37      ;
-; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 17      ;
-;     -- 3 input functions                    ; 16      ;
-;     -- <=2 input functions                  ; 4       ;
-;                                             ;         ;
-; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 37      ;
-;     -- arithmetic mode                      ; 0       ;
-;                                             ;         ;
-; Total registers                             ; 8       ;
-;     -- Dedicated logic registers            ; 8       ;
-;     -- I/O registers                        ; 0       ;
-;                                             ;         ;
-; I/O pins                                    ; 12      ;
-;                                             ;         ;
-; Embedded Multiplier 9-bit elements          ; 0       ;
-;                                             ;         ;
-; Maximum fan-out node                        ; N~input ;
-; Maximum fan-out                             ; 11      ;
-; Total fan-out                               ; 160     ;
-; Average fan-out                             ; 2.32    ;
-+---------------------------------------------+---------+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimated Total logic elements              ; 67         ;
+;                                             ;            ;
+; Total combinational functions               ; 66         ;
+; Logic element usage by number of LUT inputs ;            ;
+;     -- 4 input functions                    ; 22         ;
+;     -- 3 input functions                    ; 12         ;
+;     -- <=2 input functions                  ; 32         ;
+;                                             ;            ;
+; Logic elements by mode                      ;            ;
+;     -- normal mode                          ; 39         ;
+;     -- arithmetic mode                      ; 27         ;
+;                                             ;            ;
+; Total registers                             ; 37         ;
+;     -- Dedicated logic registers            ; 37         ;
+;     -- I/O registers                        ; 0          ;
+;                                             ;            ;
+; I/O pins                                    ; 16         ;
+;                                             ;            ;
+; Embedded Multiplier 9-bit elements          ; 0          ;
+;                                             ;            ;
+; Maximum fan-out node                        ; clk1~input ;
+; Maximum fan-out                             ; 29         ;
+; Total fan-out                               ; 317        ;
+; Average fan-out                             ; 2.35       ;
++---------------------------------------------+------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                ;
-+----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------+-------------+--------------+
-; |moore                     ; 37 (37)             ; 8 (8)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 12   ; 0            ; 0          ; |moore              ; moore       ; work         ;
-+----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------+-------------+--------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                         ;
++----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+------------------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name          ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+------------------------------+-------------+--------------+
+; |TopLevel                  ; 66 (0)              ; 37 (0)                    ; 0           ; 0          ; 0            ; 0       ; 0         ; 16   ; 0            ; 0          ; |TopLevel                    ; TopLevel    ; work         ;
+;    |CLK_Divider:clkdiv|    ; 38 (38)             ; 29 (29)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |TopLevel|CLK_Divider:clkdiv ; CLK_Divider ; work         ;
+;    |moore:FSM|             ; 28 (28)             ; 8 (8)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |TopLevel|moore:FSM          ; moore       ; work         ;
++----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+------------------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
 +------------------------------------------------------------------------------+
-; State Machine - |moore|Cs                                                    ;
+; State Machine - |TopLevel|moore:FSM|Cs                                       ;
 +--------+--------+--------+--------+--------+--------+--------+-------+-------+
 ; Name   ; Cs.c35 ; Cs.c30 ; Cs.c25 ; Cs.c20 ; Cs.c15 ; Cs.c10 ; Cs.c5 ; Cs.c0 ;
 +--------+--------+--------+--------+--------+--------+--------+-------+-------+
@@ -236,23 +242,33 @@ Encoding Type:  One-Hot
 +--------+--------+--------+--------+--------+--------+--------+-------+-------+
 
 
-+---------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                               ;
-+----------------------------------------------------+---------------------+------------------------+
-; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
-+----------------------------------------------------+---------------------+------------------------+
-; NE$latch                                           ; NE                  ; yes                    ;
-; Ns.c35_672                                         ; Selector13          ; yes                    ;
-; Ns.c30_786                                         ; Selector13          ; yes                    ;
-; Ns.c25_900                                         ; Selector13          ; yes                    ;
-; Ns.c20_1014                                        ; Selector13          ; yes                    ;
-; Ns.c15_1128                                        ; Selector13          ; yes                    ;
-; Ns.c10_1242                                        ; Selector13          ; yes                    ;
-; Ns.c5_1356                                         ; Selector13          ; yes                    ;
-; Ns.c0_1470                                         ; Selector13          ; yes                    ;
-; Number of user-specified and inferred latches = 9  ;                     ;                        ;
-+----------------------------------------------------+---------------------+------------------------+
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++----------------------------------------------------+----------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal  ; Free of Timing Hazards ;
++----------------------------------------------------+----------------------+------------------------+
+; moore:FSM|NE                                       ; moore:FSM|Selector13 ; yes                    ;
+; moore:FSM|Ns.c0_1287                               ; moore:FSM|Selector8  ; yes                    ;
+; moore:FSM|Ns.c10_1125                              ; moore:FSM|Selector8  ; yes                    ;
+; moore:FSM|Ns.c20_963                               ; moore:FSM|Selector8  ; yes                    ;
+; moore:FSM|Ns.c30_801                               ; moore:FSM|Selector8  ; yes                    ;
+; moore:FSM|Ns.c5_1206                               ; moore:FSM|Selector8  ; yes                    ;
+; moore:FSM|Ns.c25_882                               ; moore:FSM|Selector8  ; yes                    ;
+; moore:FSM|Ns.c15_1044                              ; moore:FSM|Selector8  ; yes                    ;
+; moore:FSM|Ns.c35_720                               ; moore:FSM|Selector8  ; yes                    ;
+; Number of user-specified and inferred latches = 9  ;                      ;                        ;
++----------------------------------------------------+----------------------+------------------------+
 Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++--------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                             ;
++---------------------------------------+----------------------------------------+
+; Register name                         ; Reason for Removal                     ;
++---------------------------------------+----------------------------------------+
+; CLK_Divider:clkdiv|slowClock_sig      ; Merged with CLK_Divider:clkdiv|cnt[26] ;
+; Total Number of Removed Registers = 1 ;                                        ;
++---------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -260,8 +276,8 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 8     ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 37    ;
+; Number of registers using Synchronous Clear  ; 28    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 8     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -270,24 +286,38 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 
 
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------+
+; 3:1                ; 28 bits   ; 56 LEs        ; 28 LEs               ; 28 LEs                 ; Yes        ; |TopLevel|CLK_Divider:clkdiv|cnt[15] ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 2 LEs                ; 8 LEs                  ; No         ; |TopLevel|moore:FSM|Selector8        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------+
+
+
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 12                          ;
-; cycloneiii_ff         ; 8                           ;
+; boundary_port         ; 16                          ;
+; cycloneiii_ff         ; 37                          ;
 ;     CLR               ; 8                           ;
-; cycloneiii_lcell_comb ; 38                          ;
-;     normal            ; 38                          ;
+;     SCLR              ; 28                          ;
+;     plain             ; 1                           ;
+; cycloneiii_lcell_comb ; 70                          ;
+;     arith             ; 27                          ;
+;         2 data inputs ; 27                          ;
+;     normal            ; 43                          ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 1                           ;
+;         1 data inputs ; 5                           ;
 ;         2 data inputs ; 3                           ;
-;         3 data inputs ; 16                          ;
-;         4 data inputs ; 17                          ;
+;         3 data inputs ; 12                          ;
+;         4 data inputs ; 22                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 5.00                        ;
-; Average LUT depth     ; 3.27                        ;
+; Max LUT depth         ; 3.70                        ;
+; Average LUT depth     ; 2.66                        ;
 +-----------------------+-----------------------------+
 
 
@@ -296,7 +326,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -306,67 +336,72 @@ Note: All latches listed above may not be present at the end of synthesis due to
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Tue Apr 19 14:53:08 2022
+    Info: Processing started: Tue Apr 19 17:16:07 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off TopLevel -c TopLevel
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file de10_lite_golden_top.v
     Info (12023): Found entity 1: DE10_LITE_Golden_Top File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/DE10_LITE_Golden_Top.v Line: 29
-Info (12021): Found 0 design units, including 0 entities, in source file toplevel.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file toplevel.vhd
+    Info (12022): Found design unit 1: TopLevel-behave File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 12
+    Info (12023): Found entity 1: TopLevel File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file moore.vhd
-    Info (12022): Found design unit 1: moore-behave File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 11
+    Info (12022): Found design unit 1: moore-behave File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 12
     Info (12023): Found entity 1: moore File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 5
-Info (12127): Elaborating entity "moore" for the top level hierarchy
-Warning (10631): VHDL Process Statement warning at moore.vhd(28): inferring latch(es) for signal or variable "NE", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Warning (10631): VHDL Process Statement warning at moore.vhd(28): inferring latch(es) for signal or variable "Ns", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Warning (10631): VHDL Process Statement warning at moore.vhd(28): inferring latch(es) for signal or variable "RC", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Warning (10631): VHDL Process Statement warning at moore.vhd(28): inferring latch(es) for signal or variable "RG", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Warning (10631): VHDL Process Statement warning at moore.vhd(28): inferring latch(es) for signal or variable "RS", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "RS" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "RG" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "RC" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "Ns.c35" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "Ns.c30" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "Ns.c25" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "Ns.c20" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "Ns.c15" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "Ns.c10" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "Ns.c5" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "Ns.c0" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Info (10041): Inferred latch for "NE" at moore.vhd(28) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-Warning (13012): Latch NE$latch has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal SC File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 6
-Warning (13012): Latch Ns.c35_672 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal SS File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 6
-Warning (13012): Latch Ns.c30_786 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal SC File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 6
-Warning (13012): Latch Ns.c25_900 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal N File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 6
-Warning (13012): Latch Ns.c20_1014 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal Cs.c15 File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 13
-Warning (13012): Latch Ns.c15_1128 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal Cs.c10 File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 13
-Warning (13012): Latch Ns.c10_1242 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal SC File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 6
-Warning (13012): Latch Ns.c5_1356 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal Cs.c35 File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 13
-Warning (13012): Latch Ns.c0_1470 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 28
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal SS File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file clk_divider.vhd
+    Info (12022): Found design unit 1: CLK_Divider-behavioral File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/CLK_Divider.vhd Line: 13
+    Info (12023): Found entity 1: CLK_Divider File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/CLK_Divider.vhd Line: 6
+Info (12127): Elaborating entity "TopLevel" for the top level hierarchy
+Info (12128): Elaborating entity "CLK_Divider" for hierarchy "CLK_Divider:clkdiv" File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 29
+Info (12128): Elaborating entity "moore" for hierarchy "moore:FSM" File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 32
+Warning (10631): VHDL Process Statement warning at moore.vhd(30): inferring latch(es) for signal or variable "NE", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Warning (10631): VHDL Process Statement warning at moore.vhd(30): inferring latch(es) for signal or variable "Ns", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Warning (10631): VHDL Process Statement warning at moore.vhd(30): inferring latch(es) for signal or variable "RC", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Warning (10631): VHDL Process Statement warning at moore.vhd(30): inferring latch(es) for signal or variable "RG", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Warning (10631): VHDL Process Statement warning at moore.vhd(30): inferring latch(es) for signal or variable "RS", which holds its previous value in one or more paths through the process File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "RS" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "RG" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "Ns.c35" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "Ns.c30" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "Ns.c25" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "Ns.c20" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "Ns.c15" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "Ns.c10" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "Ns.c5" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "Ns.c0" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Info (10041): Inferred latch for "NE" at moore.vhd(30) File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+Warning (13012): Latch moore:FSM|NE has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 8
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal moore:FSM|Cs.c25 File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 14
+Warning (13012): Latch moore:FSM|Ns.c0_1287 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal moore:FSM|Cs.c25 File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 14
+Warning (13012): Latch moore:FSM|Ns.c10_1125 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal moore:FSM|Cs.c35 File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 14
+Warning (13012): Latch moore:FSM|Ns.c20_963 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal TopN File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 6
+Warning (13012): Latch moore:FSM|Ns.c30_801 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal TopN File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 6
+Warning (13012): Latch moore:FSM|Ns.c5_1206 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal moore:FSM|Cs.c30 File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 14
+Warning (13012): Latch moore:FSM|Ns.c25_882 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal TopN File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 6
+Warning (13012): Latch moore:FSM|Ns.c15_1044 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal TopN File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 6
+Warning (13012): Latch moore:FSM|Ns.c35_720 has unsafe behavior File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 30
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal TopD File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 6
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "RG" is stuck at VCC File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 7
-    Warning (13410): Pin "RC" is stuck at VCC File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 7
-    Warning (13410): Pin "RS" is stuck at VCC File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/moore.vhd Line: 7
+    Warning (13410): Pin "TopRG" is stuck at GND File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 8
+    Warning (13410): Pin "TopRS" is stuck at GND File: C:/Users/estde/Documents/Vending-Machine-Lab9-/VHDL_Code/TopLevel.vhd Line: 8
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 56 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 8 input pins
-    Info (21059): Implemented 4 output pins
-    Info (21061): Implemented 44 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 28 warnings
-    Info: Peak virtual memory: 4790 megabytes
-    Info: Processing ended: Tue Apr 19 14:53:34 2022
-    Info: Elapsed time: 00:00:26
-    Info: Total CPU time (on all processors): 00:00:39
+Info (21057): Implemented 90 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 9 input pins
+    Info (21059): Implemented 7 output pins
+    Info (21061): Implemented 74 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 27 warnings
+    Info: Peak virtual memory: 4781 megabytes
+    Info: Processing ended: Tue Apr 19 17:16:30 2022
+    Info: Elapsed time: 00:00:23
+    Info: Total CPU time (on all processors): 00:00:40
 
 

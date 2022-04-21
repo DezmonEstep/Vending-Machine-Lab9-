@@ -1,5 +1,5 @@
 
-State Machine - |moore|Cs
+State Machine - |TopLevel|moore:FSM|Cs
 Name Cs.c35 Cs.c30 Cs.c25 Cs.c20 Cs.c15 Cs.c10 Cs.c5 Cs.c0 
 Cs.c0 0 0 0 0 0 0 0 0 
 Cs.c5 0 0 0 0 0 0 1 1 
