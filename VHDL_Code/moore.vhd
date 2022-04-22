@@ -33,31 +33,26 @@ case CS is
 	when c0 =>
 	state <= "000";
 	
-	if(SC = '1') then
+	if(SC = '1' or SG = '1' or SS = '1') then
 		NE <= '1';
-		
-	elsif(SG = '1') then
-		NE <= '1';
-	
-	elsif(SS = '1') then
-		NE <= '1';
-	
-	
+
 	elsif(N = '1') then
 			Ns <= c5;
 		
 	elsif(D = '1') then
-		NS <= c10;
-		
-		
+		NS <= c10;	
 		
 	elsif(Q = '1') then
 		NS <= c25;
 		
+	else
+        NE <= '0';
+        RC <= '0';
+        RG <= '0';
+        RS <= '0';
+		NS <= c0;
    end if;
-	RC <= '0';
-	RG <= '0';
-	RS <= '0';
+	
 	
 	
 	
@@ -66,27 +61,34 @@ case CS is
 	
 	state <= "001";
 	
-	if(SC = '1') then
-		NE <= '1';
-		
-	elsif(SG = '1') then
-		NE <= '1';
-	
-	elsif(SS = '1') then
-		NE <= '1';
+	if(SC = '1' or SG = '1' or SS = '1') then
+            NE <= '1';
 	
 	elsif(N = '1') then
 		Ns <= c10;
-		
+	
 	elsif(D = '1') then
+         Ns <= c15;
+                
+    elsif(Q = '1') then
+          Ns <= c30;
+          
+	elsif(N = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+        Ns <= c10;
+		NE <= '1';
+	elsif(D = '1' and (SC = '1' or SG = '1' or SS = '1')) then
 		NS <= c15;
-		
-	elsif(Q = '1') then
+		NE <= '1';
+	elsif(Q = '1' and (SC = '1' or SG = '1' or SS = '1')) then
 		NS <= c30;
+		NE <= '1';
+	else
+	       NE <= '0';
+            RC <= '0';
+            RG <= '0';
+            RS <= '0';
+            NS <= c5;
    end if;
-	RC <= '0';
-	RG <= '0';
-	RS <= '0';
 	
 	
 	
@@ -99,14 +101,8 @@ case CS is
 	
 	state <= "010";
 	
-	if(SC = '1') then
-		NE <= '1';
-		
-	elsif(SG = '1') then
-		NE <= '1';
-	
-	elsif(SS = '1') then
-		NE <= '1';
+	if(SC = '1' or SG = '1' or SS = '1') then
+                NE <= '1';
 	elsif(N = '1') then
 		Ns <= c15;
 		
@@ -115,11 +111,24 @@ case CS is
 		
 	elsif(Q = '1') then
 		NS <= c35;
+		
+	elsif(N = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                Ns <= c15;
+                NE <= '1';
+    elsif(D = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                NS <= c20;
+                NE <= '1';
+    elsif(Q = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                NS <= c35;
+                NE <= '1';
+	else
+           NE <= '0';
+            RC <= '0';
+            RG <= '0';
+            RS <= '0';
+            NS <= c10;
    end if;
-	RC <= '0';
-	RG <= '0';
-	RS <= '0';
-	
+    
 	
 	
 	
@@ -133,14 +142,8 @@ case CS is
 	
 	state <= "011";
 	
-	if(SC = '1') then
-		NE <= '1';
-		
-	elsif(SG = '1') then
-		NE <= '1';
-	
-	elsif(SS = '1') then
-		NE <= '1';
+	if(SC = '1' or SG = '1' or SS = '1') then
+                    NE <= '1';
 		
 	elsif(N = '1') then
 		Ns <= c20;
@@ -150,14 +153,24 @@ case CS is
 	
 	elsif(Q = '1') then
 		NS <= c35;
+		
+	elsif(N = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                Ns <= c20;
+                NE <= '1';
+    elsif(D = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                NS <= c35;
+                NE <= '1';
+    elsif(Q = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                NS <= c35;
+                NE <= '1';
+	
+	else
+           NE <= '0';
+            RC <= '0';
+            RG <= '0';
+            RS <= '0';
+            NS <= c15;
    end if;
-	
-	RC <= '0';
-	RG <= '0';
-	RS <= '0';
-	
-	
-	
 	
 	
 	
@@ -166,14 +179,8 @@ case CS is
 	
 	state <= "100";
 	
-	if(SC = '1') then
-		NE <= '1';
-		
-	elsif(SG = '1') then
-		NE <= '1';
-	
-	elsif(SS = '1') then
-		NE <= '1';
+	if(SC = '1' or SG = '1' or SS = '1') then
+                        NE <= '1';
 		
 	elsif(N = '1') then
 		Ns <= c25;
@@ -183,12 +190,26 @@ case CS is
 	
 	elsif(Q = '1') then
 		NS <= c35;
+		
+	elsif(N = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                Ns <= c25;
+                NE <= '1';
+    elsif(D = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                NS <= c30;
+                NE <= '1';
+    elsif(Q = '1' and (SC = '1' or SG = '1' or SS = '1')) then
+                NS <= c35;
+                NE <= '1';
+		
+	else
+          NE <= '0';
+            RC <= '0';
+            RG <= '0';
+            RS <= '0';
+            NS <= c20;
 	end if;
 	
-	RC <= '0';
-	RG <= '0';
-	RS <= '0';	
-		
+	
 		
 	
 	when c25 =>
@@ -200,10 +221,6 @@ case CS is
 			RC <= '1';
 			NE <= '0';
 			
-	elsif( SC = '0') then
-			RC <= '0';
-		
-		
 	elsif(SG = '1') then
 		NE <= '1';
 	
@@ -219,10 +236,35 @@ case CS is
 	
 	elsif(Q = '1') then
 		NS <= c35;
+			
+	elsif(N = '1' and SC = '1' ) then
+                Ns <= c5;
+                NE <= '0';
+                
+    elsif(D = '1' and SC = '1' ) then
+                   Ns <= c10;
+                   NE <= '0';
+    elsif(Q = '1' and SC = '1' ) then
+                  Ns <= c25;
+                  NE <= '0';
+    elsif(N = '1' and (SG = '1' or SS = '1')) then
+                                Ns <= c30;
+                                NE <= '1';
+    elsif(D = '1' and (SG = '1' or SS = '1')) then
+                NS <= c35;
+                NE <= '1';
+    elsif(Q = '1' and ( SG = '1' or SS = '1')) then
+                NS <= c35;
+                NE <= '1';
+	else
+         NE <= '0';
+            RC <= '0';
+            RG <= '0';
+            RS <= '0';
+            NS <= c25;
    end if;
 	
-	RG <= '0';
-	RS <= '0';
+	
 	
 	
 	
@@ -237,16 +279,11 @@ case CS is
 			RC <= '1';
 			NE <= '0';
 			
-	elsif( SC = '0') then
-			RC <= '0';
 		
 	elsif(SG = '1') then
 			NS <= c0;
 			RG <= '1';
 			NE <= '0';
-			
-	elsif( SG = '0') then
-			RG <= '0';
 		
 	
 	elsif(SS = '1') then
@@ -263,9 +300,43 @@ case CS is
 	elsif(Q = '1') then
 		NS <= c35;
 		
+	elsif(N = '1' and SC = '1' ) then
+                        Ns <= c10;
+                        NE <= '0';
+    elsif(D = '1' and SC = '1' ) then
+              Ns <= c15;
+              NE <= '0';
+     elsif(Q = '1' and SC = '1' ) then
+                           Ns <= c30;
+                           NE <= '0';
+    elsif(N = '1' and SG = '1') then
+              Ns <= c5;
+              NE <= '1';
+     elsif(D = '1' and SG = '1' ) then
+                 Ns <= c10;
+                 NE <= '0';
+     elsif(Q = '1' and SG = '1' ) then
+                 Ns <= c25;
+                 NE <= '0';
+    elsif(N = '1' and (SS = '1')) then
+                 Ns <= c35;
+                 NE <= '1';
+   elsif(D = '1' and ( SS = '1')) then
+                 NS <= c35;
+                 NE <= '1';
+   elsif(Q = '1' and (  SS = '1')) then
+                 NS <= c35;
+                 NE <= '1';
+	else
+         NE <= '0';
+            RC <= '0';
+            RG <= '0';
+            RS <= '0';
+            NS <= c30;
+		
    end if;
 	
-	RS <= '0';
+	
 	
 	
 	
@@ -278,27 +349,19 @@ case CS is
 			NS <= c10;
 			RC <= '1';
 			NE <= '0';
-					
-	elsif( SC = '0') then
-			RC <= '0';
-	
+				
 		
 	elsif(SG = '1') then
 			NS <= c5;
 			RG <= '1';
 			NE <= '0';
 			
-	elsif( SG = '0') then
-			RG <= '0';
 		
 	
 	elsif(SS = '1') then
 			NS <= c0;
 			RS <= '1';
 			NE <= '0';
-			
-	elsif( SS = '0') then
-			RS <= '0';
 		
 			
 	elsif(N = '1') then
@@ -311,6 +374,42 @@ case CS is
 	
 	elsif(Q = '1') then
 		NS <= c35;
+		
+	elsif(N = '1' and SC = '1' ) then
+             Ns <= c15;
+            NE <= '0';
+   elsif(D = '1' and SC = '1' ) then
+                      Ns <= c20;
+                      NE <= '0';
+   elsif(Q = '1' and SC = '1' ) then
+                     Ns <= c35;
+                     NE <= '0';
+   elsif(N = '1' and SG = '1') then
+                      Ns <= c10;
+                      NE <= '1';
+   elsif(D = '1' and SG = '1' ) then
+                      Ns <= c15;
+                      NE <= '0';
+   elsif(Q = '1' and SG = '1' ) then
+                      Ns <= c30;
+                      NE <= '0';
+   elsif(N = '1' and SS = '1') then
+               Ns <= c5;
+               NE <= '1';
+   elsif(D = '1' and SS = '1' ) then
+               Ns <= c10;
+               NE <= '0';
+   elsif(Q = '1' and SS = '1' ) then
+              Ns <= c25;
+              NE <= '0';
+	
+	else
+         NE <= '0';
+         RC <= '0';
+         RG <= '0';
+         RS <= '0';
+         NS <= c35;
+	
 		
    end if;
 end case;
